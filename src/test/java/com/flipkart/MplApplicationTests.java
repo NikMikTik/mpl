@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -28,14 +29,13 @@ import com.flipkart.dto.ResponseDto;
 import com.flipkart.repository.MerchantRepository;
 import com.flipkart.service.MerchantService;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = MplApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(MplApplication.class)
 public class MplApplicationTests {
+
+	@LocalServerPort
+	Integer port;
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -47,9 +47,6 @@ public class MplApplicationTests {
 	MerchantRepository merchantRepository;
 
 	ModelMapper modelMapper = new ModelMapper();
-	
-	@LocalServerPort
-	Integer port;
 
 	@Test
 	public void fetchAllMerchants() {
@@ -127,7 +124,7 @@ public class MplApplicationTests {
 		response.setToken("");
 
 		Mockito.when(merchantService.registrationFunction(merchantDto)).thenReturn((response));
-				
+
 		String url = "http://localhost:" + port + "/flipkart/signUp";
 		HttpEntity<MerchantDto> entity = new HttpEntity<>(merchantDto);
 		ResponseEntity<ResponseDto> response121 = restTemplate.postForEntity(url, entity, ResponseDto.class);
