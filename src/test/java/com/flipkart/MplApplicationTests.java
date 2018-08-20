@@ -28,14 +28,6 @@ import com.flipkart.dto.ResponseDto;
 import com.flipkart.repository.MerchantRepository;
 import com.flipkart.service.MerchantService;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = MplApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MplApplicationTests {
-
-	@LocalServerPort
-	Integer port;
-
-=======
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +36,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MplApplicationTests {
-	
+
 	@Autowired
 	private TestRestTemplate restTemplate;
 
@@ -55,6 +47,9 @@ public class MplApplicationTests {
 	MerchantRepository merchantRepository;
 
 	ModelMapper modelMapper = new ModelMapper();
+	
+	@LocalServerPort
+	Integer port;
 
 	@Test
 	public void fetchAllMerchants() {
@@ -78,7 +73,7 @@ public class MplApplicationTests {
 
 		Mockito.when(merchantService.fetchAllUser()).thenReturn(merchantList);
 		String url = "http://localhost:" + port + "/flipkart/allMerchants";
-	
+
 		List<MerchantDto> response = restTemplate
 				.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<MerchantDto>>() {
 				}).getBody();
@@ -107,7 +102,7 @@ public class MplApplicationTests {
 
 		Mockito.when(merchantService.registrationFunction(merchantDto)).thenReturn((response));
 		Mockito.when(merchantService.loginFunction(merchantDto)).thenReturn(response);
-		
+
 		String url = "http://localhost:" + port + "/flipkart/signIn";
 		HttpEntity<MerchantDto> entity = new HttpEntity<>(merchantDto);
 		ResponseEntity<ResponseDto> response121 = restTemplate.postForEntity(url, entity, ResponseDto.class);
@@ -115,7 +110,6 @@ public class MplApplicationTests {
 
 	}
 
-	
 	@Test
 	public void registrationUser() {
 
@@ -140,9 +134,5 @@ public class MplApplicationTests {
 		assertEquals(200, response121.getStatusCodeValue());
 
 	}
-	
-	
 
-=======
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
 }

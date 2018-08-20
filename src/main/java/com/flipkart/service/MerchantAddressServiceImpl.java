@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.flipkart.dto.MerchantAddressDto;
 import com.flipkart.dto.MerchantDto;
 import com.flipkart.dto.ResponseDto;
 import com.flipkart.model.Merchant;
+import com.flipkart.model.MerchantAddress;
 import com.flipkart.repository.MerchantAddressRepository;
 import com.flipkart.repository.MerchantRepository;
 
@@ -35,8 +37,9 @@ public class MerchantAddressServiceImpl implements MerchantAddressService {
 	Logger logger = LoggerFactory.getLogger(MerchantAddressServiceImpl.class);
 
 	ModelMapper modelMapper=new ModelMapper();
-	@Override
+	/*@Override
 	public ResponseDto addAddress(MerchantDto merchantDto, HttpServletRequest request) {
+		System.out.println("qwe"+merchantDto.getMerchantAddressDto().getCountry());
 		if (merchantRepository.findByMerchantId(merchantDto.getMerchantId()) == null) {
 			response.setCode(HttpStatus.NOT_FOUND.value());
 			response.setToken(noToken);
@@ -46,12 +49,16 @@ public class MerchantAddressServiceImpl implements MerchantAddressService {
 		}
 		Merchant merchant1 = merchantRepository.findByMerchantId(merchantDto.getMerchantId());
 		if (merchant1.getMerchantEmail().equals(iredis.getValue(request.getHeader("Authorization")))) {
-			Merchant merchant2=modelMapper.map(merchantDto, Merchant.class);
-			Merchant merchant = merchantRepository.findByMerchantId(merchantDto.getMerchantId());
-			merchant.setMerchantAddress(merchant2.getMerchantAddress());
-			merchantAddressRepository.save(merchant2.getMerchantAddress());
-			merchant.setMerchantConfirmPassword(merchant.getMerchantPassword());
-			merchantRepository.save(merchant);
+			System.out.println("in here");
+			//Merchant merchant2=modelMapper.map(merchantDto, Merchant.class);
+			MerchantAddressDto merchantAddressDto2=merchantDto.getMerchantAddressDto();
+			MerchantAddress merchantAddress=modelMapper.map(merchantAddressDto2, MerchantAddress.class);
+			//Merchant merchant = merchantRepository.findByMerchantId(merchantDto.getMerchantId());
+			System.out.println(merchantAddress.getCountry());
+			merchant1.setMerchantAddress(merchantAddress);
+			merchantAddressRepository.save(merchantAddress);
+			merchant1.setMerchantConfirmPassword(merchant1.getMerchantPassword());
+			merchantRepository.save(merchant1);
 			logger.info("Merchant's Address Inserted Successfully");
 			response.setCode(HttpStatus.OK.value());
 			response.setToken(noToken);
@@ -65,6 +72,6 @@ public class MerchantAddressServiceImpl implements MerchantAddressService {
 			response.setResponse("Access Denied...");
 			return response;
 		}
-	}
+	}*/
 
 }

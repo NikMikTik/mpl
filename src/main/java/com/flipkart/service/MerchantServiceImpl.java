@@ -1,18 +1,12 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Collection;
+
 import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-=======
-import java.util.Date;
-import java.util.List;
-
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -20,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.MailException;
@@ -30,20 +23,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.flipkart.dto.MerchantAddressDto;
-=======
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
 import com.flipkart.dto.MerchantDto;
 import com.flipkart.dto.ResponseDto;
 import com.flipkart.exception.FlipkartException;
 import com.flipkart.model.Merchant;
-<<<<<<< HEAD
+
 import com.flipkart.model.MerchantAddress;
-=======
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
+
 import com.flipkart.repository.MerchantRepository;
 
 import io.jsonwebtoken.Jwts;
@@ -60,9 +46,9 @@ public class MerchantServiceImpl implements MerchantService {
 	@Autowired
 	private MerchantRepository merchantRepository;
 
-	@Autowired
+/*	@Autowired
 	private JavaMailSender sender;
-
+*/
 	@Autowired
 	private IRedisService iredis;
 
@@ -118,9 +104,9 @@ public class MerchantServiceImpl implements MerchantService {
 				&& (merchantDto.getMerchantPassword().equals(merchantDto.getMerchantConfirmPassword()))) {
 			merchant.setMerchantPassword(bCryptPasswordEncoder.encode(merchantDto.getMerchantPassword()));
 			merchantRepository.save(merchant);
-<<<<<<< HEAD
-			MimeMessage message = sender.createMimeMessage();
-			try {
+
+			/*MimeMessage message = sender.createMimeMessage();
+			try {System.out.println("email sending");
 				MimeMessageHelper helper = new MimeMessageHelper(message, true);
 				helper.setTo(merchant.getMerchantEmail());
 				helper.setText("<html><body><h2>Hi " + merchant.getMerchantName()
@@ -130,19 +116,19 @@ public class MerchantServiceImpl implements MerchantService {
 				helper.setSubject("Welcome to Flipkart Merchant Site");
 				ClassPathResource file1 = new ClassPathResource("seller-hub-logo.png");
 				helper.addInline("id101", file1);
-				/*
+				System.out.println("email sent");
+				
 				 * ClassPathResource file = new ClassPathResource("Terms and Conditions.pdf");
 				 * helper.addAttachment("Terms and Conditions.pdf", file);
-				 */
+				 
 				sender.send(message);
 			} catch (MailException e) {
 				e.printStackTrace();
 			} catch (MessagingException e) {
 				e.printStackTrace();
-			}
+			}*/
 
-=======
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
+
 			response.setCode(HttpStatus.OK.value());
 			response.setToken(noToken);
 			response.setMessage("Registered Successfully...");
@@ -164,14 +150,13 @@ public class MerchantServiceImpl implements MerchantService {
 		MerchantDto merchantDto;
 		for (Merchant merchant : merchantList) {
 			merchantDto = modelMapper.map(merchant, MerchantDto.class);
-<<<<<<< HEAD
+
 			if (merchant.getMerchantAddress() != null) {
 				MerchantAddress address = merchant.getMerchantAddress();
 				MerchantAddressDto addressDto = modelMapper.map(address, MerchantAddressDto.class);
 				merchantDto.setMerchantAddressDto(addressDto);
 			}
-=======
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
+
 			merchantDto.setMerchantConfirmPassword("Not saved");
 			merchantDtoList.add(merchantDto);
 		}
@@ -184,11 +169,8 @@ public class MerchantServiceImpl implements MerchantService {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public ResponseDto logoutFunction(HttpServletRequest request) {
-=======
-	public ResponseDto logoutFunction(MerchantDto merchantDto, HttpServletRequest request) {
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
 		String token = request.getHeader("Authorization");
 		iredis.deleteValue(token);
 		ResponseDto responseDto = new ResponseDto();
@@ -196,12 +178,13 @@ public class MerchantServiceImpl implements MerchantService {
 		responseDto.setMessage("Successfully logged out");
 		responseDto.setToken("Token Deleted");
 		responseDto.setResponse("To get Access, Login Again");
-<<<<<<< HEAD
+
 		logger.info("Successfully logged out");
-=======
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
+
 		return responseDto;
 
 	}
+
+
 
 }

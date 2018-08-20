@@ -8,6 +8,6 @@ import com.flipkart.dto.ResponseDto;
 
 public interface MerchantAddressService {
 	
-	public ResponseDto addAddress(MerchantDto merchantDto, HttpServletRequest request);
+	//public ResponseDto addAddress(MerchantDto merchantDto, HttpServletRequest request);
 
 }

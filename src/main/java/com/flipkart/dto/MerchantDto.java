@@ -2,17 +2,13 @@ package com.flipkart.dto;
 
 
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
-=======
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
+
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
@@ -44,6 +40,8 @@ public class MerchantDto {
 	@OneToOne()
 	private MerchantAddressDto merchantAddressDto;
 	
+	
+	
 	public int getMerchantId() {
 		return merchantId;
 	}
@@ -62,7 +60,6 @@ public class MerchantDto {
 	public void setMerchantEmail(String merchantEmail) {
 		this.merchantEmail = merchantEmail;
 	}
-	
 	public String getMerchantphoneNo() {
 		return merchantphoneNo;
 	}
@@ -81,23 +78,13 @@ public class MerchantDto {
 	public void setMerchantConfirmPassword(String merchantConfirmPassword) {
 		this.merchantConfirmPassword = merchantConfirmPassword;
 	}
-<<<<<<< HEAD
 	public MerchantAddressDto getMerchantAddressDto() {
 		return merchantAddressDto;
 	}
 	public void setMerchantAddressDto(MerchantAddressDto merchantAddressDto) {
 		this.merchantAddressDto = merchantAddressDto;
 	}
-		
-=======
-	
-	public MerchantAddress getMerchantAddress() {
-		return merchantAddress;
-	}
-	public void setMerchantAddress(MerchantAddress merchantAddress) {
-		this.merchantAddress = merchantAddress;
-	}
->>>>>>> 75401a0f94b8c68c2b1d540db932cae47b83d2a8
-	
+
+
 	
 }

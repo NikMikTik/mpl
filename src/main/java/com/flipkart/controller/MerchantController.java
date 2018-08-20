@@ -44,10 +44,11 @@ public class MerchantController {
 		return merchantService.fetchAllUser();
 	}
 
-	// ADD MERCHANT'S ADDRESS
+/*	// ADD MERCHANT'S ADDRESS
 	@RequestMapping(value = "/add/address", method = RequestMethod.PUT)
 	public ResponseDto addAddress(@RequestBody MerchantDto merchantDto, HttpServletRequest request) {
 		if (iredis.checkToken(request)) {
+			System.out.println("qweqweqweq");
 			return merchantAddressService.addAddress(merchantDto,request);
 		} else {
 			response.setCode(HttpStatus.FORBIDDEN.value());
@@ -55,6 +56,6 @@ public class MerchantController {
 			response.setResponse("Access Denied");
 			return response;
 		}
-	}
+	}*/
 
 }
